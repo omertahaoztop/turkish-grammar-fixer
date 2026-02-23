@@ -9,12 +9,14 @@
     "contextMenus",
     "storage",
     "activeTab",
-    "notifications"
+    "notifications",
+    "https://tdk.gov.tr/*",
+    "https://openrouter.ai/*"
   ],
 
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   },
 
   "content_scripts": [

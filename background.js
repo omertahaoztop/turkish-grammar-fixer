@@ -92,39 +92,33 @@ async function fetchTDKRules() {
 }
 
 async function collectArticleUrls() {
-  const urls = [];
-  for (const pageUrl of TDK_RULES_URLS) {
+  const pages = await Promise.all(TDK_RULES_URLS.map(async (pageUrl) => {
     try {
       const res = await fetch(pageUrl);
       const html = await res.text();
-      const matches = [...html.matchAll(/href='(https:\/\/tdk\.gov\.tr\/icerik\/yazim-kurallari\/[^']+)'/g)];
-      for (const m of matches) {
-        if (!urls.includes(m[1])) urls.push(m[1]);
-      }
+      return [...html.matchAll(/href='(https:\/\/tdk\.gov\.tr\/icerik\/yazim-kurallari\/[^']+)'/g)].map(m => m[1]);
     } catch {
-      // Skip failed index pages
+      return [];
     }
-  }
-  return urls;
+  }));
+  const seen = new Set();
+  return pages.flat().filter(url => seen.has(url) ? false : seen.add(url));
 }
 
 async function fetchAllArticles(urls) {
-  const results = [];
-  for (const url of urls) {
+  const fetched = await Promise.all(urls.map(async (url) => {
     try {
       const res = await fetch(url);
       const html = await res.text();
       const title = extractTitle(html);
-      if (SKIP_RULE_TITLES.has(title)) continue;
+      if (SKIP_RULE_TITLES.has(title)) return null;
       const content = extractArticleContent(html);
-      if (content.length > 50) {
-        results.push(`## ${title}\n${content}`);
-      }
+      return content.length > 50 ? `## ${title}\n${content}` : null;
     } catch {
-      // Skip failed articles
+      return null;
     }
-  }
-  return results;
+  }));
+  return fetched.filter(Boolean);
 }
 
 function extractTitle(html) {
