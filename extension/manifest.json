@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Türkçe Yazım Düzeltici",
+  "version": "1.0.0",
+  "description": "Seçili metinde Türkçe yazım kurallarını (de/da, ki, mi/mı, büyük harf) otomatik düzeltir.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "clipboardWrite",
+    "http://127.0.0.1:5858/*"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "turkish-grammar-fixer@local",
+      "strict_min_version": "57.0"
+    }
+  }
+}
