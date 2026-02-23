@@ -1,0 +1,56 @@
+{
+  "manifest_version": 2,
+  "name": "Türkçe Yazım Düzeltici",
+  "version": "1.0.0",
+  "description": "TDK yazım kurallarına göre Türkçe metinleri LLM ile düzeltir",
+  "author": "turkish-grammar-fixer",
+
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "notifications"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": false
+  },
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Türkçe Yazım Düzeltici",
+    "default_popup": "popup.html"
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "turkish-grammar-fixer@extension",
+      "strict_min_version": "109.0"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Türkçe Yazım Düzeltici — Ayarlar</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>⚙️ Türkçe Yazım Düzeltici</h1>
+      <p class="subtitle">Ayarlar</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>OpenRouter API Anahtarı</h2>
+        <p class="description">
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">openrouter.ai</a>
+          adresinden ücretsiz API anahtarı alabilirsiniz.
+        </p>
+        <div class="field">
+          <label for="api-key">API Anahtarı</label>
+          <div class="input-row">
+            <input
+              type="password"
+              id="api-key"
+              placeholder="sk-or-v1-..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button id="toggle-visibility" class="btn-icon" title="Göster/Gizle">👁</button>
+          </div>
+        </div>
+        <button id="test-api" class="btn btn-secondary">Bağlantıyı Test Et</button>
+        <div id="test-result" class="test-result hidden"></div>
+      </section>
+
+      <section class="card">
+        <h2>Model Seçimi</h2>
+        <p class="description">Kullanılacak LLM modelini seçin. Ücretsiz modeller listelenmektedir.</p>
+        <div class="field">
+          <label for="model-select">Model</label>
+          <select id="model-select"></select>
+        </div>
+        <p class="hint">Seçilen model çalışmazsa diğer modeller otomatik olarak denenir.</p>
+      </section>
+
+      <section class="card">
+        <h2>TDK Yazım Kuralları</h2>
+        <p class="description">Kurallar TDK web sitesinden otomatik çekilir ve 7 gün önbelleğe alınır.</p>
+        <div id="tdk-status" class="tdk-status">Kontrol ediliyor...</div>
+        <button id="refresh-tdk" class="btn btn-secondary">🔄 Kuralları Yenile</button>
+      </section>
+
+      <section class="card">
+        <h2>Hakkında</h2>
+        <p class="description">
+          TDK (Türk Dil Kurumu) yazım kurallarına göre Türkçe metinleri düzelten Firefox eklentisi.
+          Sağ tıklama menüsünden seçili metni veya yazı alanının tamamını kontrol edebilirsiniz.
+        </p>
+        <ul class="feature-list">
+          <li>📝 Seçili metni sağ tıkla → "Türkçe yazımı düzelt"</li>
+          <li>✏️ Yazı alanında sağ tıkla → "Bu alanın tamamını düzelt"</li>
+          <li>✅ Düzeltilmiş metni tek tıkla uygula veya kopyala</li>
+          <li>📖 Her hata için TDK kural açıklaması</li>
+          <li>🔄 Otomatik model fallback sistemi</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <button id="save-btn" class="btn btn-primary">Kaydet</button>
+      <span id="save-status" class="save-status hidden">✅ Kaydedildi!</span>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+
+
+.tyd-tooltip {
+  position: absolute;
+  z-index: 2147483647;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  max-height: 480px;
+  overflow-y: auto;
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cdd6f4;
+  animation: tyd-fadein 0.15s ease-out;
+}
+
+@keyframes tyd-fadein {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tyd-tooltip.tyd-has-errors {
+  border-color: #f38ba8;
+}
+
+.tyd-tooltip.tyd-no-errors {
+  border-color: #a6e3a1;
+}
+
+.tyd-tooltip.tyd-error {
+  border-color: #fab387;
+}
+
+
+.tyd-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid #313244;
+  background: #181825;
+  border-radius: 11px 11px 0 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.tyd-header .tyd-icon {
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.tyd-header strong {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #cdd6f4;
+}
+
+.tyd-model-badge {
+  font-size: 10px;
+  font-weight: 500;
+  padding: 2px 7px;
+  background: #313244;
+  border-radius: 20px;
+  color: #6c7086;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 120px;
+}
+
+.tyd-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6c7086;
+  font-size: 14px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.1s, background 0.1s;
+}
+
+.tyd-close:hover {
+  color: #cdd6f4;
+  background: #313244;
+}
+
+
+.tyd-body {
+  padding: 12px 14px;
+}
+
+.tyd-ozet {
+  margin: 0 0 12px;
+  color: #bac2de;
+  font-size: 12px;
+}
+
+.tyd-error-msg {
+  margin: 0;
+  color: #fab387;
+  font-size: 13px;
+}
+
+
+.tyd-errors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.tyd-error-item {
+  background: #181825;
+  border-radius: 8px;
+  padding: 10px 12px;
+  border-left: 3px solid #f38ba8;
+}
+
+.tyd-error-diff {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
+
+.tyd-wrong {
+  color: #f38ba8;
+  background: rgba(243, 139, 168, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12px;
+  text-decoration: line-through;
+  text-decoration-color: rgba(243, 139, 168, 0.6);
+}
+
+.tyd-arrow {
+  color: #6c7086;
+  font-size: 12px;
+}
+
+.tyd-correct {
+  color: #a6e3a1;
+  background: rgba(166, 227, 161, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.tyd-error-rule {
+  color: #bac2de;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.tyd-tdk-rule {
+  color: #89b4fa;
+  font-size: 11px;
+}
+
+
+.tyd-corrected-block {
+  background: rgba(166, 227, 161, 0.05);
+  border: 1px solid rgba(166, 227, 161, 0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.tyd-corrected-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6c7086;
+  margin-bottom: 6px;
+}
+
+.tyd-corrected-text {
+  color: #a6e3a1;
+  font-size: 13px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+
+.tyd-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 12px;
+  border-top: 1px solid #313244;
+  background: #181825;
+  border-radius: 0 0 11px 11px;
+  position: sticky;
+  bottom: 0;
+}
+
+.tyd-btn {
+  flex: 1;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.08s;
+}
+
+.tyd-btn:active {
+  transform: scale(0.97);
+}
+
+.tyd-btn-apply {
+  background: #a6e3a1;
+  color: #1e1e2e;
+}
+
+.tyd-btn-apply:hover {
+  background: #b9f5b3;
+}
+
+.tyd-btn-copy {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+.tyd-btn-copy:hover {
+  background: #9fc4ff;
+}
+
+.tyd-btn-cancel {
+  background: #313244;
+  color: #cdd6f4;
+}
+
+.tyd-btn-cancel:hover {
+  background: #45475a;
+}
+
+
+.tyd-loading {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2147483647;
+  animation: tyd-fadein 0.15s ease-out;
+}
+
+.tyd-loading-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 24px;
+  padding: 10px 16px;
+  color: #cdd6f4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.tyd-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #313244;
+  border-top-color: #89b4fa;
+  border-radius: 50%;
+  animation: tyd-spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes tyd-spin {
+  to { transform: rotate(360deg); }
+}
