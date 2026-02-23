@@ -32,6 +32,8 @@ YAZIM KONTROLÜ YAPILIRKEN KESİNLİKLE UYULACAK KURALLAR:
 - Kısaltmaları, argo ifadeleri, bölgesel söyleyişleri hedefle değil yazım olarak değerlendir
 - "sen de" (bağlaç, ayrı) ≠ "sende" (bulunma hali, bitişik) — anlamı dikkate al
 - "da/de" bağlacı her zaman ayrı; "da/de/ta/te" bulunma eki her zaman bitişik
+- Unvan/saygı sözleri (Hocam, Bey, Hanım, Efendi vb.) hitap olarak kullanılıyorsa büyük harfle başlar: "Vedat Hocam, nasılsınız?" / "Merhaba Murat Bey" — cümle içinde sıradan isim tamlamasıysa küçük harfle yazılır: "Vedat hocam derste anlattı." / "Murat beyle konuştum."
+- Teknik terimlerin kendine özgü büyük/küçük harf yazımını koru ve düzelt (örn: IPsec, GitLab, iPhone, JavaScript, TypeScript, macOS, iOS, WhatsApp, YouTube, LinkedIn, Wi-Fi, API, HTTP, SQL, Linux, GitHub, Docker, OpenAI)
 - Şüphe durumunda düzeltme yapma; yanlış düzeltme hiç düzeltmemekten kötüdür
 
 ÇIKTI FORMATI — Sadece bu JSON'ı döndür, başka hiçbir şey ekleme:
