@@ -24,3 +24,335 @@ yapıcak*	yapacak
 gelicek*	gelecek
 anlıyamadım	anlayamadım
 söyliyeceğim	söyleyeceğim
+# GECTurk istisna sözlüklerinden ters çevrildi (Apache-2.0)
+bel ki	belki
+halbu ki	halbuki
+madem ki	mademki
+meğer ki	meğerki
+oysa ki	oysaki
+ağızı*	ağzı
+alını	alnı
+bağırı	bağrı
+benizi*	benzi
+böğürü	böğrü
+burunu*	burnu
+genizi*	genzi
+göğüsü*	göğsü
+gönülü*	gönlü
+oğulu*	oğlu
+deviri	devri
+kayıbı*	kaybı
+omuzu*	omzu
+fikiri*	fikri
+keşifi*	keşfi
+resimi*	resmi
+şehiri*	şehri
+nehiri*	nehri
+seyiri	seyri
+içerde*	içeride
+içerden*	içeriden
+dışardan*	dışarıdan
+dışarda*	dışarıda
+ilerde*	ileride
+ilerden*	ileriden
+şurda*	şurada
+şurdan*	şuradan
+burda*	burada
+burdan*	buradan
+kitapı	kitabı
+kitapa	kitaba
+sebepi	sebebi
+sebepe	sebebe
+bantı	bandı
+banta	banda
+benti	bendi
+bente	bende
+cilti	cildi
+cilte	cilde
+etütü	etüdü
+etüte	etüde
+metotu	metodu
+metota	metoda
+standartı	standardı
+standarta	standarda
+ahenki	ahengi
+ahenke	ahenge
+hevenki	hevengi
+hevenke	hevenge
+renki	rengi
+renke	renge
+çiçeke	çiçeğe
+çiçeki	çiçeği
+kepenki	kepengi
+kepenke	kepenge
+ağaça	ağaca
+ağaçı	ağacı
+borçu	borcu
+borça	borca
+geçiti	geçidi
+geçite	geçide
+hesapı	hesabı
+hesapa	hesaba
+ilaçı	ilacı
+ilaça	ilaca
+inançı	inancı
+inança	inanca
+inatı	inadı
+inata	inada
+kağıtı	kağıdı
+kağıta	kağıda
+kanatı	kanadı
+kasapı	kasabı
+kasapa	kasaba
+kiliti	kilidi
+kilite	kilide
+mezhepi	mezhebi
+mezhepe	mezhebe
+pabuçu	pabucu
+pabuça	pabuca
+piliçi	pilici
+piliçe	pilice
+seneti	senedi
+şurupu	şurubu
+şurupa	şuruba
+umutu	umudu
+umuta	umuda
+yoğurtu	yoğurdu
+yoğurta	yoğurda
+evrağı	evrakı
+evrağa	evraka
+hukuğu	hukuku
+hukuğa	hukuka
+sepedi	sepeti
+sepede	sepete
+kanıdı	kanıtı
+kanıda	kanıta
+anıdı	anıtı
+buludu	bulutu
+buluda	buluta
+altet*	alt et
+arzet*	arz et
+arzed*	arz ed
+azatet*	azat et
+azated*	azat ed
+danset*	dans et
+dansed*	dans ed
+göçet*	göç et
+göçed*	göç ed
+ilanet*	ilan et
+ilaned*	ilan ed
+kabulet*	kabul et
+kabuled*	kabul ed
+notet*	not et
+oyunet*	oyun et
+oyuned*	oyun ed
+sözet*	söz et
+sözed*	söz ed
+terket*	terk et
+terked*	terk ed
+yoket*	yok et
+yoked*	yok ed
+yokol*	yok ol
+emir et	emret
+emir etti	emretti
+emir ettim	emrettim
+emir ettin	emrettin
+emir ettik	emrettik
+emir ettiniz	emrettiniz
+emir ettiler	emrettiler
+emir etmek	emretmek
+emir etme	emretme
+emir etmiş	emretmiş
+emir etsin	emretsin
+emir etmedi	emretmedi
+emir etmeyin	emretmeyin
+emir edecek	emredecek
+emir eder	emreder
+emir ederim	emrederim
+emir edip	emredip
+emir ediyor	emrediyor
+emir ediyorum	emrediyorum
+emir ediyoruz	emrediyoruz
+emir ederek	emrederek
+kayıp ol	kaybol
+kayıp oldu	kayboldu
+kayıp oldum	kayboldum
+kayıp oldun	kayboldun
+kayıp olduk	kaybolduk
+kayıp oldular	kayboldular
+kayıp olmak	kaybolmak
+kayıp olma	kaybolma
+kayıp olmuş	kaybolmuş
+kayıp olsun	kaybolsun
+kayıp olmadı	kaybolmadı
+kayıp olacak	kaybolacak
+kayıp olur	kaybolur
+kayıp olup	kaybolup
+kayıp oluyor	kayboluyor
+kayıp olarak	kaybolarak
+kayıp et	kaybet
+kayıp etti	kaybetti
+kayıp ettim	kaybettim
+kayıp ettin	kaybettin
+kayıp ettik	kaybettik
+kayıp ettiniz	kaybettiniz
+kayıp ettiler	kaybettiler
+kayıp etmek	kaybetmek
+kayıp etme	kaybetme
+kayıp etmiş	kaybetmiş
+kayıp etsin	kaybetsin
+kayıp etmedi	kaybetmedi
+kayıp etmeyin	kaybetmeyin
+kayıp edecek	kaybedecek
+kayıp eder	kaybeder
+kayıp ederim	kaybederim
+kayıp edip	kaybedip
+kayıp ediyor	kaybediyor
+kayıp ediyorum	kaybediyorum
+kayıp ediyoruz	kaybediyoruz
+kayıp ederek	kaybederek
+darb et	darbet
+darb etti	darbetti
+darb ettim	darbettim
+darb ettin	darbettin
+darb ettik	darbettik
+darb ettiniz	darbettiniz
+darb ettiler	darbettiler
+darb etmek	darbetmek
+darb etme	darbetme
+darb etmiş	darbetmiş
+darb etsin	darbetsin
+darb etmedi	darbetmedi
+darb etmeyin	darbetmeyin
+darb edecek	darbedecek
+darb eder	darbeder
+darb ederim	darbederim
+darb edip	darbedip
+darb ediyor	darbediyor
+darb ediyorum	darbediyorum
+darb ediyoruz	darbediyoruz
+darb ederek	darbederek
+derc et	dercet
+derc etti	dercetti
+derc ettim	dercettim
+derc ettin	dercettin
+derc ettik	dercettik
+derc ettiniz	dercettiniz
+derc ettiler	dercettiler
+derc etmek	dercetmek
+derc etme	dercetme
+derc etmiş	dercetmiş
+derc etsin	dercetsin
+derc etmedi	dercetmedi
+derc etmeyin	dercetmeyin
+derc edecek	dercedecek
+derc eder	derceder
+derc ederim	dercederim
+derc edip	dercedip
+derc ediyor	dercediyor
+derc ediyorum	dercediyorum
+derc ediyoruz	dercediyoruz
+derc ederek	dercederek
+hamd et	hamdet
+hamd etti	hamdetti
+hamd ettim	hamdettim
+hamd ettin	hamdettin
+hamd ettik	hamdettik
+hamd ettiniz	hamdettiniz
+hamd ettiler	hamdettiler
+hamd etmek	hamdetmek
+hamd etme	hamdetme
+hamd etmiş	hamdetmiş
+hamd etsin	hamdetsin
+hamd etmedi	hamdetmedi
+hamd etmeyin	hamdetmeyin
+hamd edecek	hamdedecek
+hamd eder	hamdeder
+hamd ederim	hamdederim
+hamd edip	hamdedip
+hamd ediyor	hamdediyor
+hamd ediyorum	hamdediyorum
+hamd ediyoruz	hamdediyoruz
+hamd ederek	hamdederek
+af et	affet
+af etti	affetti
+af ettim	affettim
+af ettin	affettin
+af ettik	affettik
+af ettiniz	affettiniz
+af ettiler	affettiler
+af etmek	affetmek
+af etme	affetme
+af etmiş	affetmiş
+af etsin	affetsin
+af etmedi	affetmedi
+af etmeyin	affetmeyin
+af edecek	affedecek
+af eder	affeder
+af ederim	affederim
+af edip	affedip
+af ediyor	affediyor
+af ediyorum	affediyorum
+af ediyoruz	affediyoruz
+af ederek	affederek
+his et	hisset
+his etti	hissetti
+his ettim	hissettim
+his ettin	hissettin
+his ettik	hissettik
+his ettiniz	hissettiniz
+his ettiler	hissettiler
+his etmek	hissetmek
+his etme	hissetme
+his etmiş	hissetmiş
+his etsin	hissetsin
+his etmedi	hissetmedi
+his etmeyin	hissetmeyin
+his edecek	hissedecek
+his eder	hisseder
+his ederim	hissederim
+his edip	hissedip
+his ediyor	hissediyor
+his ediyorum	hissediyorum
+his ediyoruz	hissediyoruz
+his ederek	hissederek
+red et	reddet
+red etti	reddetti
+red ettim	reddettim
+red ettin	reddettin
+red ettik	reddettik
+red ettiniz	reddettiniz
+red ettiler	reddettiler
+red etmek	reddetmek
+red etme	reddetme
+red etmiş	reddetmiş
+red etsin	reddetsin
+red etmedi	reddetmedi
+red etmeyin	reddetmeyin
+red edecek	reddedecek
+red eder	reddeder
+red ederim	reddederim
+red edip	reddedip
+red ediyor	reddediyor
+red ediyorum	reddediyorum
+red ediyoruz	reddediyoruz
+red ederek	reddederek
+civan perçemi*	civanperçemi
+akşam sefası*	akşamsefası
+hanım göbeği*	hanımgöbeği
+dilber dudağı*	dilberdudağı
+vezir parmağı*	vezirparmağı
+bülbül yuvası*	bülbülyuvası
+kuş lokumu*	kuşlokumu
+ali nazik*	alinazik
+saman yolu*	samanyolu
+cam göbeği*	camgöbeği
+bir az	biraz
+bir çok	birçok
+bir çoğu*	birçoğu
+bir kaç	birkaç
+her hangi	herhangi
+hiç bir	hiçbir
+TDK'da	TDK'de
+THY'da	THY'de
+TRT'da	TRT'de

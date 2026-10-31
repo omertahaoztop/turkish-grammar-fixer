@@ -11,6 +11,8 @@ import akana
 from .edits import Edit, diff_edits
 
 LEXICON = Path(__file__).parent / "data" / "lexicon.tsv"
+DEASCII = Path(__file__).parent / "data" / "deascii.tsv"
+FOLD = str.maketrans("çğıöşüâîû", "cgiosuaiu")
 
 
 def tr_lower(s: str) -> str:
@@ -57,9 +59,26 @@ class RuleEngine:
 
     def reload(self):
         self.lexicon = load_lexicon(LEXICON, *self.extra)
+        self.deascii = {}
+        for line in DEASCII.read_text(encoding="utf-8").splitlines()[1:]:
+            ascii_w, tur, *amb = line.split("\t")
+            self.deascii[ascii_w] = (tur, bool(amb))
 
     def check(self, text: str) -> list[Edit]:
-        return self._lexicon(text) + self._akana(text)
+        # akana önde: aynı düzeltmede birleştirme onun açıklamasını ve kural adını seçer.
+        return self._akana(text) + self._lexicon(text) + self._deascii(text)
+
+    def _deascii(self, text: str) -> list[Edit]:
+        out = []
+        for m in re.finditer(r"\w+", text):
+            w = m.group()
+            # Türkçe harf içeren kelimeye dokunulmaz: "şık" gibi doğru ama seyrek biçimler bozulmasın.
+            if not w.isascii() or (hit := self.deascii.get(tr_lower(w).translate(FOLD))) is None:
+                continue
+            tur, ambiguous = hit
+            out.append(Edit(m.start(), m.end(), w, match_case(w, tur), ["türkçe-karakter"], "türkçe_karakter",
+                            "Türkçe karakter eksik yazılmış.", 0.45 if ambiguous else 0.7))
+        return out
 
     def _lexicon(self, text: str) -> list[Edit]:
         low, out = tr_lower(text), []

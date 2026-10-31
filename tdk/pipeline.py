@@ -6,7 +6,7 @@ from difflib import SequenceMatcher
 from math import prod
 
 from .edits import Edit
-from .engines import LLMEngine, RuleEngine, tr_lower
+from .engines import FOLD, LLMEngine, RuleEngine, tr_lower
 
 CHUNK = 600
 
@@ -34,7 +34,7 @@ def chunks(text: str) -> list[tuple[int, str]]:
 
 def _plausible(e: Edit) -> bool:
     """Tek bir öneri anlam değiştiren yeniden yazım gibi duruyorsa elenir."""
-    a, b = tr_lower(e.original), tr_lower(e.replacement)
+    a, b = tr_lower(e.original).translate(FOLD), tr_lower(e.replacement).translate(FOLD)
     if a == b:
         return True
     return SequenceMatcher(None, a, b).ratio() >= 0.6 or len(a) <= 4

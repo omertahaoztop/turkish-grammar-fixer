@@ -4,7 +4,7 @@ Linux masaüstünde (Wayland/Hyprland) her uygulamada çalışan Türkçe yazım
 
 Denetim üç katmanlıdır:
 
-1. **Kurallar** (akana + `tdk/data/lexicon.tsv`): milisaniyeler içinde sonuç verir, model gerektirmez.
+1. **Kurallar** (akana + `tdk/data/lexicon.tsv` + `tdk/data/deascii.tsv`): milisaniyeler içinde sonuç verir, model gerektirmez. `cok`, `calisiyor` gibi Türkçe karakteri eksik kelimeleri de düzeltir.
 2. **Yerel model** (Gemma 4 E4B, llama.cpp): kuralların kaçırdıklarını yakalar. İşlemcide birkaç saniye sürer, en fazla 20 sn beklenir.
 3. **Bulut** (OpenRouter, `google/gemini-3.8-flash`): isteğe bağlı. Yerel model çökerse yedek, eğitimde öğretmen olarak kullanılır. Gönderilmeden önce kişisel veriler maskelenir.
 
@@ -87,4 +87,4 @@ Yeniden ölçmek için: `uv run python eval/run.py --threshold 0.4`.
 
 ## Lisans
 
-MIT. `eval/movie_reviews.jsonl` ve eğitimde indirilen veri [GECTurk](https://github.com/GGLAB-KU/gecturk) (Apache-2.0) kaynaklıdır.
+MIT. `eval/movie_reviews.jsonl`, eğitimde indirilen veri ve `lexicon.tsv`'deki istisna sözlükleri [GECTurk](https://github.com/GGLAB-KU/gecturk) (Apache-2.0) kaynaklıdır. `deascii.tsv`, [FrequencyWords](https://github.com/hermitdave/FrequencyWords) (MIT) Türkçe sıklık listesinden üretilmiştir.
