@@ -1,0 +1,10 @@
+[Unit]
+Description=tdk haftalık eğitim (LoRA + değerlendirme kapısı)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/tdk train
+Nice=10
+# Eğitim swap'a taşıp masaüstünü kilitlemesin; sınırı aşarsa yalnız eğitim öldürülür.
+MemoryMax=14G
+MemorySwapMax=0

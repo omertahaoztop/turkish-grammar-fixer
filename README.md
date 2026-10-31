@@ -1,92 +1,90 @@
-# Türkçe Yazım Düzeltici
+# tdk — Türkçe yazım denetleyici
 
-TDK (Türk Dil Kurumu) yazım kurallarına göre Türkçe metinleri düzelten Firefox eklentisi. OpenRouter üzerindeki ücretsiz LLM modellerini kullanır.
+Linux masaüstünde (Wayland/Hyprland) her uygulamada çalışan Türkçe yazım ve dilbilgisi denetleyicisi. Metni seç, kısayola bas, hataları gör, istediğin düzeltmeleri uygula.
 
-## Özellikler
+Denetim üç katmanlıdır:
 
-- **Sağ tıklama menüsü** ile seçili metni veya yazı alanının tamamını kontrol et
-- Her hata için **TDK kural açıklaması**
-- Düzeltilmiş metni **tek tıkla uygula** (input/textarea/contenteditable)
-- Çalışmayan model için **otomatik fallback** sistemi
-- **Ücretsiz** — OpenRouter free tier kullanır
+1. **Kurallar** (akana + `tdk/data/lexicon.tsv`): milisaniyeler içinde sonuç verir, model gerektirmez.
+2. **Yerel model** (Gemma 4 E4B, llama.cpp): kuralların kaçırdıklarını yakalar. İşlemcide birkaç saniye sürer, en fazla 20 sn beklenir.
+3. **Bulut** (OpenRouter, `google/gemini-3.8-flash`): isteğe bağlı. Yerel model çökerse yedek, eğitimde öğretmen olarak kullanılır. Gönderilmeden önce kişisel veriler maskelenir.
 
-## Desteklenen Modeller (Ücretsiz)
-
-| Model | Sağlayıcı | Öncelik |
-|-------|-----------|---------|
-| Gemini 2.0 Flash Exp | Google | 1. (Önerilen) |
-| Llama 3.3 70B Instruct | Meta | 2. |
-| DeepSeek Chat | DeepSeek | 3. |
-| Gemma 3 27B | Google | 4. |
-| Mistral 7B Instruct | Mistral AI | 5. |
+Açılır pencere önce kural sonucunu gösterir; model sonucu geldiğinde liste güncellenir. Acil durumda modeli beklemeden uygulayabilirsin.
 
 ## Kurulum
 
-### 1. OpenRouter API Anahtarı Al
-
-1. [openrouter.ai](https://openrouter.ai) adresine git
-2. Hesap oluştur (Google ile giriş yeterli)
-3. [openrouter.ai/keys](https://openrouter.ai/keys) adresinden yeni API anahtarı oluştur
-4. Anahtarı kopyala (`sk-or-v1-...`)
-
-### 2. Firefox'a Yükle
-
-**Geçici Yükleme (Geliştirme):**
-
-1. Firefox'ta `about:debugging` adresine git
-2. "Bu Firefox" → "Geçici Eklenti Yükle"
-3. Bu klasördeki `manifest.json` dosyasını seç
-
-**Kalıcı Yükleme (.xpi paketi):**
-
 ```bash
-# Zip olarak paketle
-zip -r turkish-grammar-fixer.xpi manifest.json background.js content.js content.css popup.html popup.css popup.js options.html options.css options.js icons/
+./install.sh            # denetleyici, servisler, kısayollar
+./install.sh --train    # ek olarak haftalık LoRA eğitim ortamı (AMD GPU, ~30 GB disk)
 ```
 
-Firefox'ta `about:addons` → Dişli ikon → "Dosyadan Eklenti Yükle" → `.xpi` dosyasını seç
+- RAM 12 GB'ın altındaysa yerel model kurulmaz; yalnız kurallar ve bulut kullanılır.
+- Bulut için OpenRouter anahtarını `~/.config/openrouter/key` dosyasına yaz.
+- Yerel modeli GPU'da çalıştırmak için:
 
-### 3. API Anahtarını Gir
+```bash
+echo 'TDK_DEVICE=Vulkan0 TDK_NGL=99' > ~/.config/tdk/llama.env
+systemctl --user restart tdk-llama
+```
 
-1. Eklenti ikonuna tıkla → "⚙️ Ayarlar"
-2. API anahtarını gir
-3. "Bağlantıyı Test Et" ile doğrula
-4. "Kaydet"
+Servisler: `tdk-llama` (model, :8091, en fazla 8 GB RAM), `tdkd` (denetim, :8092), `tdk-train.timer` (pazar 03:30).
 
 ## Kullanım
 
-### Seçili Metin
+| Kısayol | İş |
+|---|---|
+| `SUPER + ALT + T` | Seçili metni denetle, açılır pencerede göster |
+| `SUPER + ALT + SHIFT + T` | Pencere açmadan, yalnız kurallarla yüksek güvenli düzeltmeleri uygula |
 
-1. Kontrol etmek istediğin metni seç
-2. Sağ tıkla → **"Türkçe yazımı düzelt"**
-3. Tooltip'te hataları gör ve düzeltilmiş metni kopyala
+Açılır pencerede `1`-`9` öneriyi seçer/bırakır, `Enter` uygular, `Esc` kapatır. Terminallerde düzeltilmiş metin yalnız panoya kopyalanır.
 
-### Yazı Alanı (Input / Textarea)
+Komut satırı:
 
-1. Yazı alanına sağ tıkla
-2. **"Bu alanın tamamını düzelt"**
-3. Tooltip'te **"✅ Uygula"** butonuna tıkla → metin otomatik değiştirilir
-
-## Kontrol Edilen Yazım Kuralları
-
-- Büyük/küçük harf kullanımı
-- Noktalama işaretleri (virgül, nokta, kesme işareti vb.)
-- Bileşik sözcüklerin bitişik/ayrı yazımı
-- Büyük ünlü uyumu ve ünsüz benzeşmesi
-- ki / de / da / mi eklerinin doğru kullanımı
-- Özel adlara eklenen kesme işareti
-- Yabancı kökenli sözcüklerin Türkçe yazımı
-- Anlatım bozuklukları
-
-## Dosya Yapısı
-
+```bash
+tdk check "metin"          # öneriler
+tdk check -f "metin"       # yalnız kurallar, beklemesiz
+tdk check -c --fix <dosya.txt   # bulutla, yalnız düzeltilmiş metin
+tdk stats                  # öğrenme istatistikleri
+tdk train --dry-run        # eğitim verisini hazırla, eğitme
 ```
-turkish-grammar-fixer/
-├── manifest.json        # Eklenti tanımı (MV2)
-├── background.js        # OpenRouter API + context menu
-├── content.js           # Sayfa etkileşimi + tooltip
-├── content.css          # Tooltip stilleri
-├── popup.html/css/js    # Toolbar popup
-├── options.html/css/js  # Ayarlar sayfası
-└── icons/               # PNG ikonlar
+
+## Ayarlar
+
+`~/.config/tdk/config.toml` (yalnız değiştirmek istediğin alanlar):
+
+```toml
+apply_threshold = 0.5
+
+[local]
+enabled = true
+timeout = 20
+
+[cloud]
+enabled = true
+model = "google/gemini-3.8-flash"
 ```
+
+Kendi kelime düzeltmelerin için `~/.config/tdk/lexicon.tsv` (`yanlış<TAB>doğru`; `herkez*` gibi sonda `*` çekimli biçimleri de kapsar).
+
+## Öğrenme
+
+- Aynı öneriyi iki kez reddedersen o düzeltme bir daha gösterilmez.
+- Kabul ettiğin düzeltmeler örnek olarak saklanır; benzer metinlerde modele örnek verilir.
+- Haftada bir LoRA ince ayarı yapılır: senin kararların, bulut öğretmenin etiketleri ve GECTurk verisi. Yeni adaptör yalnız ölçümde eskisinden kötü değilse devreye alınır, yoksa geri dönülür. Eğitim 14 GB RAM ile sınırlıdır; aşarsa yalnız eğitim durur.
+
+## Ölçümler
+
+`eval/gold.jsonl` (104 cümle, 44'ü hatasız), eşik 0,4:
+
+| Kurulum | Kesinlik | Duyarlılık | F0.5 | Tam doğru | Yanlış alarm | Gecikme |
+|---|---|---|---|---|---|---|
+| Yalnız kurallar | 0,857 | 0,529 | 0,763 | 71 | 3/44 | ms |
+| + Qwen3.5-4B (CPU) | 0,707 | 0,853 | 0,732 | 79 | 10/44 | 3,1 sn |
+| + Gemma 4 E4B (CPU) | 0,800 | 0,882 | 0,815 | 89 | 6/44 | 3,0 sn |
+| + Gemma 4 12B (GPU) | 0,831 | 0,941 | 0,851 | 91 | 8/44 | 2,4 sn |
+| + Gemini 3.8 Flash (bulut) | 0,878 | 0,956 | 0,893 | 97 | 3/44 | 2,6 sn |
+
+Yeniden ölçmek için: `uv run python eval/run.py --threshold 0.4`.
+
+## Lisans
+
+MIT. `eval/movie_reviews.jsonl` ve eğitimde indirilen veri [GECTurk](https://github.com/GGLAB-KU/gecturk) (Apache-2.0) kaynaklıdır.

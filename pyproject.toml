@@ -1,0 +1,13 @@
+[project]
+name = "tdk"
+version = "2.0.0"
+description = "Sistem geneli Türkçe yazım denetleyici: yerel kural motoru + yerel LLM + öğrenme"
+requires-python = ">=3.12"
+dependencies = ["akana==0.6.0"]
+
+[project.scripts]
+tdk = "tdk.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

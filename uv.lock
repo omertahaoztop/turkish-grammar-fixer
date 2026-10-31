@@ -1,0 +1,25 @@
+version = 1
+revision = 5
+requires-python = ">=3.12"
+
+[[package]]
+name = "akana"
+version = "0.6.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/18/53/514f37419413c280fd29448e66d0bce76b39c5188349a64a20dda4b931e0/akana-0.6.0.tar.gz", hash = "sha256:e992274c386fcd060462cc8284eedaf520864c270dfa68125ca42db2beea4a9a", size = 4379962, upload-time = "2026-10-06T10:48:24.014Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3a/b8/92b360e319fbe67a0e334ef5e044ce20d21a5f44da4c2499a63a9ef0b0a4/akana-0.6.0-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:adcae171ac1e883a63285858aee87d12b2cd092691a845c4796041ad338943c4", size = 6399080, upload-time = "2026-10-06T10:48:18.649Z" },
+    { url = "https://files.pythonhosted.org/packages/9c/7d/60ae3930fb2e3909c591a9be88d92b4a3c11514dcd3f71935f1daeb412e8/akana-0.6.0-cp310-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3242a70059ed3a5a401e49f8501d10de546554776892dde8fa278ada93831ed4", size = 6506584, upload-time = "2026-10-06T10:48:20.709Z" },
+    { url = "https://files.pythonhosted.org/packages/3b/d8/b3f5b4341681e62c5aecf1d5ce15f443917447aa1a1275159095217807cf/akana-0.6.0-cp310-abi3-win_amd64.whl", hash = "sha256:99f10c54144f3db9b2786224bda16b17c7899c41d5e2f3b155f35c0b6abc2a1a", size = 6217060, upload-time = "2026-10-06T10:48:22.462Z" },
+]
+
+[[package]]
+name = "tdk"
+version = "2.0.0"
+source = { editable = "." }
+dependencies = [
+    { name = "akana" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "akana", specifier = "==0.6.0" }]

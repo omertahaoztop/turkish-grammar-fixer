@@ -1,0 +1,14 @@
+[Unit]
+Description=tdk yerel dil modeli (llama-server)
+
+[Service]
+Environment=TDK_MODEL=%h/.local/share/tdk/models/gemma-4-E4B_q4_0-it.gguf TDK_DEVICE=none TDK_NGL=0 TDK_EXTRA=
+EnvironmentFile=-%h/.config/tdk/llama.env
+ExecStart=/usr/bin/llama-server -m ${TDK_MODEL} --device ${TDK_DEVICE} -ngl ${TDK_NGL} --host 127.0.0.1 --port 8091 -t 8 -c 8192 -np 2 --reasoning-budget 0 --log-disable $TDK_EXTRA
+Restart=on-failure
+# Bellek dolarsa masaüstü değil yalnız bu servis ölsün; tdkd kurallarla devam eder.
+MemoryMax=8G
+MemorySwapMax=0
+
+[Install]
+WantedBy=default.target

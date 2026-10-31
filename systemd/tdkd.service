@@ -1,0 +1,9 @@
+[Unit]
+Description=tdk Türkçe yazım denetleyici servisi
+
+[Service]
+ExecStart=%h/.local/bin/tdk serve
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
