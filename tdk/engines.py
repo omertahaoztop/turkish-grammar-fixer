@@ -13,6 +13,8 @@ from .edits import Edit, diff_edits
 LEXICON = Path(__file__).parent / "data" / "lexicon.tsv"
 DEASCII = Path(__file__).parent / "data" / "deascii.tsv"
 FOLD = str.maketrans("çğıöşüâîû", "cgiosuaiu")
+# Gövde en az iki harf: "gecem", "hecem", "bacam" gibi iyelikli adlar eşleşmesin.
+SPOKEN_FUTURE = re.compile(r"(?<!\w)(\w\w+?)(m[ıiuüae](?=y))?(y?)[ıiuüae]c([ae])m(?!\w)")
 
 
 def tr_lower(s: str) -> str:
@@ -66,7 +68,20 @@ class RuleEngine:
 
     def check(self, text: str) -> list[Edit]:
         # akana önde: aynı düzeltmede birleştirme onun açıklamasını ve kural adını seçer.
-        return self._akana(text) + self._lexicon(text) + self._deascii(text)
+        return self._akana(text) + self._lexicon(text) + self._deascii(text) + self._spoken_future(text)
+
+    def _spoken_future(self, text: str) -> list[Edit]:
+        out = []
+        for m in SPOKEN_FUTURE.finditer(tr_lower(text)):
+            stem, neg, y, vowel = m.groups()
+            back = vowel == "a"
+            # Olumsuzluk ekinin daralmış ünlüsü de düzelir: gelmiyecem -> gelmeyeceğim.
+            neg = neg[0] + ("a" if back else "e") if neg else ""
+            repl = stem + neg + y + ("acağım" if back else "eceğim")
+            orig = text[m.start():m.end()]
+            out.append(Edit(m.start(), m.end(), orig, match_case(orig, repl), ["gelecek-zaman"], "gelecek_zaman",
+                            "Gelecek zaman eki konuşma diliyle yazılmış.", 0.8))
+        return out
 
     def _deascii(self, text: str) -> list[Edit]:
         out = []
