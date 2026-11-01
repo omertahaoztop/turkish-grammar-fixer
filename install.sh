@@ -25,7 +25,9 @@ else
   systemctl --user disable --now tdk-llama.service 2>/dev/null || true
   echo "Yerel model kapalı (RAM ${ram} GB, ~/.config/tdk/config.toml): yalnız kurallar ve bulut kullanılacak."
 fi
-systemctl --user enable --now tdkd.service
+systemctl --user enable tdkd.service
+# Güncellemede çalışan servis eski kodla kalmasın.
+systemctl --user restart tdkd.service
 
 if [[ ${1:-} == --train ]]; then
   # shortcut: yalnız AMD (ROCm) torch kurulur; NVIDIA için index-url cu12x olmalı.
