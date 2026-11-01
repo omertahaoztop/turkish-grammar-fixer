@@ -18,7 +18,7 @@ Açılır pencere önce kural sonucunu gösterir; model sonucu geldiğinde liste
 ```
 
 - RAM 12 GB'ın altındaysa yerel model kurulmaz; yalnız kurallar ve bulut kullanılır. Güçlü makinede de bunu istiyorsan kurulumdan önce `~/.config/tdk/config.toml` dosyasına `[local]` altında `enabled = false` yaz. Bu durumda bulut her denetimde birincil model olur.
-- Bulut için OpenRouter anahtarını `~/.config/openrouter/key` dosyasına yaz.
+- Bulut için OpenRouter anahtarını `~/.config/openrouter/key` dosyasına yaz ya da aşağıdaki OpenCode Go ayarını kullan.
 - Yerel modeli GPU'da çalıştırmak için:
 
 ```bash
@@ -62,6 +62,19 @@ timeout = 20
 enabled = true
 model = "google/gemini-3.8-flash"
 ```
+
+OpenCode Go aboneliğiyle bulut (anahtar `~/.config/opencode-go/key`):
+
+```toml
+[cloud]
+url = "https://opencode.ai/inference/go/v1"
+model = "glm-5.3-flash"
+key_file = "~/.config/opencode-go/key"
+extra = {}
+headers = { "x-opencode-session" = "tdk" }
+```
+
+`extra = {}` OpenRouter'a özgü `reasoning` alanını kaldırır; OpenCode Go oturum başlığı olmayan isteği reddeder.
 
 Kendi kelime düzeltmelerin için `~/.config/tdk/lexicon.tsv` (`yanlış<TAB>doğru`; `herkez*` gibi sonda `*` çekimli biçimleri de kapsar).
 

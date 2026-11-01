@@ -148,9 +148,12 @@ def _clean_output(s: str) -> str:
 
 class LLMEngine:
     def __init__(self, name: str, base_url: str, model: str, api_key: str | None = None,
-                 weight: float = 0.6, timeout: float = 120, extra: dict | None = None, mask_pii: bool = False):
+                 weight: float = 0.6, timeout: float = 120, extra: dict | None = None, mask_pii: bool = False,
+                 headers: dict | None = None):
         self.name, self.base_url, self.model, self.api_key = name, base_url.rstrip("/"), model, api_key
         self.weight, self.timeout, self.extra = weight, timeout, extra or {}
+        # Cloudflare arkasındaki uçlar (OpenCode Go) Python-urllib User-Agent'ını 1010 ile reddeder.
+        self.headers = {"Content-Type": "application/json", "User-Agent": "tdk/2.0", **(headers or {})}
         self.pii = akana.TurkishPiiEngine() if mask_pii else None
 
     def correct(self, text: str, examples: list[tuple[str, str]] = ()) -> str:
@@ -165,7 +168,7 @@ class LLMEngine:
         messages.append({"role": "user", "content": text})
         body = {"model": self.model, "messages": messages, "temperature": 0,
                 "max_tokens": 2 * len(text) + 512, **self.extra}
-        headers = {"Content-Type": "application/json"}
+        headers = dict(self.headers)
         if self.api_key:
             headers["Authorization"] = f"Bearer {self.api_key}"
         req = urllib.request.Request(f"{self.base_url}/chat/completions", json.dumps(body).encode(), headers)
