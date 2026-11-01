@@ -22,7 +22,8 @@ class Service:
             edits = self.pipe.check(text, fast=True)
         else:
             examples = self.store.similar(text) if self.pipe.llm else []
-            edits = self.pipe.check(text, use_cloud=cloud, examples=examples, errors=errors)
+            # Yerel model kapalı makinede bulut birincil denetleyicidir.
+            edits = self.pipe.check(text, use_cloud=cloud or not self.pipe.llm, examples=examples, errors=errors)
             # Yerel model yanıt vermediyse ve bulut açıksa yedek olarak bulut kullanılır.
             if not cloud and self.pipe.cloud and any(e.startswith("yerel") for e in errors):
                 edits = self.pipe.check(text, use_cloud=True, examples=examples, errors=errors)

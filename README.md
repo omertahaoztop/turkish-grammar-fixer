@@ -17,7 +17,7 @@ Açılır pencere önce kural sonucunu gösterir; model sonucu geldiğinde liste
 ./install.sh --train    # ek olarak haftalık LoRA eğitim ortamı (AMD GPU, ~30 GB disk)
 ```
 
-- RAM 12 GB'ın altındaysa yerel model kurulmaz; yalnız kurallar ve bulut kullanılır.
+- RAM 12 GB'ın altındaysa yerel model kurulmaz; yalnız kurallar ve bulut kullanılır. Güçlü makinede de bunu istiyorsan kurulumdan önce `~/.config/tdk/config.toml` dosyasına `[local]` altında `enabled = false` yaz. Bu durumda bulut her denetimde birincil model olur.
 - Bulut için OpenRouter anahtarını `~/.config/openrouter/key` dosyasına yaz.
 - Yerel modeli GPU'da çalıştırmak için:
 

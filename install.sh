@@ -14,15 +14,16 @@ cp systemd/*.service systemd/*.timer ~/.config/systemd/user/
 systemctl --user daemon-reload
 
 ram=$(awk '/MemTotal/ {print int($2 / 1048576)}' /proc/meminfo)
-if (( ram < 12 )); then
-  # Model ~7 GB ister; küçük RAM'de masaüstünü boğmamak için yalnız kurallar + bulut kullanılır.
-  [[ -f ~/.config/tdk/config.toml ]] || printf '[local]\nenabled = false\n' >~/.config/tdk/config.toml
-  echo "RAM ${ram} GB: yerel model kurulmadı, yalnız kurallar ve bulut kullanılacak."
-else
+# Model ~7 GB ister; küçük RAM'de masaüstünü boğmamak için yalnız kurallar + bulut kullanılır.
+(( ram >= 12 )) || [[ -f ~/.config/tdk/config.toml ]] || printf '[local]\nenabled = false\n' >~/.config/tdk/config.toml
+if .venv/bin/python -c 'import sys; from tdk.config import load; sys.exit(not load()["local"]["enabled"])'; then
   model=$d/models/gemma-4-E4B_q4_0-it.gguf
   [[ -f $model ]] || curl -L --fail -o "$model" \
     https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-gguf/resolve/main/gemma-4-E4B_q4_0-it.gguf
   systemctl --user enable --now tdk-llama.service
+else
+  systemctl --user disable --now tdk-llama.service 2>/dev/null || true
+  echo "Yerel model kapalı (RAM ${ram} GB, ~/.config/tdk/config.toml): yalnız kurallar ve bulut kullanılacak."
 fi
 systemctl --user enable --now tdkd.service
 
